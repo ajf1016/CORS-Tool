@@ -23,14 +23,7 @@ function App() {
     //post
     if (type === "POST") {
       axios
-        .post(api, apiData && { apiData }, {
-          headers: {
-            // "Access-Control-Allow-Headers":
-            //   "https://developers-api.oneruppee.com",
-            Authorization:
-              "BearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2Nzg5MTIwLCJpYXQiOjE2NjUyNTMxMjAsImp0aSI6ImM5MjQzMWY4ZmVjODQ5Njk4NDAxZmFhZGMzODU2NTRkIiwidXNlcl9pZCI6M30.3GoWFzmwq7ar7UxLmBz3MhYdXresUdIpeQV-S8iGN3o",
-          },
-        })
+        .post(api, Auth, apiData && { apiData })
         .then((res) => {
           console.log(res.data);
         })
@@ -40,7 +33,7 @@ function App() {
     } else {
       //get
       axios
-        .get(api, Auth)
+        .get(api, Auth, apiData && { apiData })
         .then((res) => {
           console.log(res.data);
         })
