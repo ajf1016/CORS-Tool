@@ -6,12 +6,15 @@ import axios from "axios";
 function App() {
   const [api, setApi] = useState("");
   const [type, setType] = useState("");
+  const [apiData, setApiData] = useState("");
+
+  console.log({ apiData });
 
   //access token
   const Auth = {
     headers: {
       Authorization:
-        "BearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2MzU5NjUyLCJpYXQiOjE2NjQ4MjM2NTIsImp0aSI6Ijg5ZDNjZDIwZTU2MDQ1MmY4NmY0ZDUzNTNmZjg4NzMyIiwidXNlcl9pZCI6NX0.BKDG676O2C5B_PZsjDVir3k_0AK8-IXuZBnTBD1_oMY",
+        "BearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2Nzg5MTIwLCJpYXQiOjE2NjUyNTMxMjAsImp0aSI6ImM5MjQzMWY4ZmVjODQ5Njk4NDAxZmFhZGMzODU2NTRkIiwidXNlcl9pZCI6M30.3GoWFzmwq7ar7UxLmBz3MhYdXresUdIpeQV-S8iGN3o",
     },
   };
 
@@ -20,7 +23,14 @@ function App() {
     //post
     if (type === "POST") {
       axios
-        .post(api, Auth)
+        .post(api, apiData && { apiData }, {
+          headers: {
+            // "Access-Control-Allow-Headers":
+            //   "https://developers-api.oneruppee.com",
+            Authorization:
+              "BearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2Nzg5MTIwLCJpYXQiOjE2NjUyNTMxMjAsImp0aSI6ImM5MjQzMWY4ZmVjODQ5Njk4NDAxZmFhZGMzODU2NTRkIiwidXNlcl9pZCI6M30.3GoWFzmwq7ar7UxLmBz3MhYdXresUdIpeQV-S8iGN3o",
+          },
+        })
         .then((res) => {
           console.log(res.data);
         })
@@ -54,8 +64,8 @@ function App() {
       {/* api input */}
       <input
         style={{
-          background: "red",
-          color: "white",
+          background: "white",
+          color: "#000",
           fontSize: "22px",
           width: "90%",
           border: "1px solid yellow",
@@ -67,11 +77,29 @@ function App() {
         onChange={(e) => setApi(e.target.value)}
       />
       <br />
+      <textarea
+        style={{
+          background: "white",
+          color: "#000",
+          fontSize: "22px",
+          // width: "90%",
+          border: "1px solid yellow",
+          padding: "20px",
+          margin: "20px 0",
+        }}
+        placeholder="Enter your Req DATA if any EX >> slug : data,slug : data"
+        rows="4"
+        cols="50"
+        value={apiData}
+        onChange={(e) => setApiData(e.target.value)}
+      ></textarea>
+
+      <br />
       {/* type input */}
       <input
         style={{
-          background: "red",
-          color: "white",
+          background: "white",
+          color: "#000",
           padding: "20px",
           width: "40%",
           fontSize: "22px",
